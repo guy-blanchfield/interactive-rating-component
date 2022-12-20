@@ -1,49 +1,178 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
 
-  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-  
-  <title>Frontend Mentor | Interactive rating component</title>
+    <!-- ----- the google fonts routine ----------- -->
 
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-  </style>
-</head>
-<body>
+    <!-- first the preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-  <!-- Rating state start -->
+    <!-- then the preload -->
+    <link
+      link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Overpass:wght@400;700&display=swap"
+    />
 
-  How did we do?
+    <!-- then the stylesheet setting media to print -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Overpass:wght@400;700&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
 
-  Please let us know how we did with your support request. All feedback is appreciated 
-  to help us improve our offering!
+    <!-- then the noscript fallback -->
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Overpass:wght@400;700&display=swap"
+      />
+    </noscript>
 
-  1 2 3 4 5
+    <!-- custom styles -->
 
-  Submit
+    <link rel="stylesheet" href="./styles/jwc-reset.css" />
+    <link rel="stylesheet" href="./styles/style.css" />
 
-  <!-- Rating state end -->
+    <!-- icon link last -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
 
-  <!-- Thank you state start -->
+    <script src="./js/interactiveRating.js" defer></script>
 
-  You selected <!-- Add rating here --> out of 5
+    <title>Frontend Mentor | Interactive rating component</title>
 
-  Thank you!
+    <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+    <!-- attribution styles now in ./styles/style.css-->
+  </head>
+  <body>
+    <!-- let's have an h1 -->
+    <h1>Interactive Rating Component</h1>
 
-  We appreciate you taking the time to give a rating. If you ever need more support, 
-  don’t hesitate to get in touch!
+    <!-- and a container to make life easier -->
+    <main class="main-container">
+      <!-- section probably the best fit semantically for this -->
+      <section class="rating panel">
+        <!-- icon here as icon - should probably be a background on the h2 or the ratings panel itself 
+        but given how it's layed out, it's probably supposed to be an actual element -->
+        <div class="rating-icon">
+          <span class="rating-icon-inner" aria-hidden="true"></span>
+        </div>
 
-  <!-- Thank you state end -->
+        <h2>How did we do?</h2>
 
-  
-  <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
-  </div>
-</body>
+        <!-- form should probably include the question! -->
+        <form action="" class="rating-form" id="rating-form">
+          <fieldset class="rating-fieldset">
+            <legend class="rating-legend">
+              Please let us know how we did with your support request. All
+              feedback is appreciated to help us improve our offering!
+            </legend>
+
+            <div class="rating-radios">
+              <!-- wrapping label method so we don't need an extra div -->
+              <label class="rating-radio-label">
+                <input
+                  type="radio"
+                  id="rating-radio-1"
+                  name="rating-radio"
+                  value="rating-radio-1"
+                />
+                <span class="rating-radio-label-inner">1</span>
+              </label>
+
+              <label class="rating-radio-label">
+                <input
+                  type="radio"
+                  id="rating-radio-2"
+                  name="rating-radio"
+                  value="rating-radio-2"
+                />
+                <span class="rating-radio-label-inner">2</span>
+              </label>
+
+              <label class="rating-radio-label">
+                <input
+                  type="radio"
+                  id="rating-radio-3"
+                  name="rating-radio"
+                  value="rating-radio-3"
+                />
+                <span class="rating-radio-label-inner">3</span>
+              </label>
+
+              <label class="rating-radio-label">
+                <input
+                  type="radio"
+                  id="rating-radio-4"
+                  name="rating-radio"
+                  value="rating-radio-4"
+                />
+                <span class="rating-radio-label-inner">4</span>
+              </label>
+
+              <label class="rating-radio-label">
+                <input
+                  type="radio"
+                  id="rating-radio-5"
+                  name="rating-radio"
+                  value="rating-radio-5"
+                />
+                <span class="rating-radio-label-inner">5</span>
+              </label>
+            </div>
+          </fieldset>
+
+          <button
+            class="rating-btn btn-submit"
+            type="submit"
+            name="rating-submit"
+            value="submit"
+          >
+            Submit
+          </button>
+        </form>
+      </section>
+
+      <!-- think it makes most sense to do the thank you 
+        state  as a separate section, so there's a rating 
+        section and a thank you section -->
+
+      <section class="thankyou panel">
+        <img
+          src="./images/illustration-thank-you.svg"
+          alt="some random illustration"
+          class="thankyou-img"
+        />
+
+        <div class="pill-result">
+          You selected <span class="text-result">M</span> out of 5
+        </div>
+
+        <h2>Thank you!</h2>
+
+        <p>
+          We appreciate you taking the time to give a rating. If you ever need
+          more support, don&rsquo;t hesitate to get in touch!
+        </p>
+      </section>
+    </main>
+
+    <div class="attribution">
+      Challenge by
+      <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
+        >Frontend Mentor</a
+      >. Coded by <a href="https://github.com/guy-blanchfield">GRB</a>.
+    </div>
+  </body>
 </html>

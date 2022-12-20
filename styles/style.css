@@ -1,0 +1,352 @@
+:root {
+  /* custom properties */
+
+  /* colours */
+
+  --primary-accent-1: hsl(25, 97%, 53%);
+
+  --neutral-white: hsl(0, 0%, 100%);
+  --neutral-light: hsl(217, 12%, 63%);
+  --neutral-medium: hsl(216, 12%, 54%);
+  --neutral-dark: hsl(213, 19%, 18%);
+  --neutral-darker: hsl(213, 19%, 13%);
+  --neutral-verydark: hsl(216, 12%, 8%);
+
+  --gradient: radial-gradient(
+    circle at 50% 0%,
+    var(--neutral-dark),
+    var(--neutral-darker) 50%
+  );
+}
+
+html {
+  font-size: 15px;
+}
+
+body {
+  font-family: 'Overpass', sans-serif;
+  color: var(--neutral-white);
+  background: var(--neutral-verydark);
+}
+
+h1 {
+  font-size: 1rem;
+  color: var(--neutral-light);
+  text-transform: uppercase;
+  padding: 0.5rem;
+  border-bottom: 2px solid var(--neutral-light);
+  margin: 2rem 0;
+}
+
+/* utility classes */
+
+/* layout classes */
+
+.main-container {
+  display: grid;
+  place-content: center;
+  /* let's do padding here, rather than margin or max-width on .panel */
+  padding: 2rem;
+}
+
+@media (min-width: 450px) {
+  .main-container {
+    min-height: 75vh;
+  }
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  justify-content: center;
+
+  /* probably set height so it's not determined by the content
+  bc the content will change in the thank you state */
+  min-height: 29rem;
+  border-radius: 1rem;
+  background: var(--gradient);
+}
+
+@media (min-width: 450px) {
+  .panel {
+    /* max-width should probably only be on desktop */
+    max-width: 27rem;
+    padding: 2.5rem;
+  }
+}
+
+/* anything specific to to the panel in rating state
+can go here, currently just the variable for the circle size */
+.rating {
+  /* set a variable for the circle size */
+  /* set it relative to the view width
+  bc fixed width forces the panel to stay quite wide
+  i.e. the panel won't shrink to the available space */
+  --rating-circle-size: 10vw;
+}
+
+@media (min-width: 450px) {
+  .rating {
+    /* fixed size for the circles on anything bigger than mobile */
+    --rating-circle-size: 3.3rem;
+  }
+}
+
+.rating-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 0;
+}
+
+.rating-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--rating-circle-size);
+  height: var(--rating-circle-size);
+  border-radius: 50%;
+  background-color: var(--neutral-dark);
+}
+
+.rating-icon-inner {
+  width: 0.9rem;
+  height: 0.9rem;
+  background: url(../images/icon-star.svg) no-repeat;
+  /* background-size: cover; */
+  /* cover was cutting a bit off, try 100% */
+  background-size: 100%;
+}
+
+@media (min-width: 450px) {
+  .rating-icon-inner {
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+}
+
+.rating-fieldset {
+  /* fieldset comes with default padding */
+  padding: 0;
+  border: 0;
+
+  /* tried grid with gap here, has no effect, something to do with fieldset */
+  /* try with margins or padding */
+}
+
+.rating-legend {
+  color: var(--neutral-medium);
+  /* according to style guide font-size should be 15px
+  but the mobile-design.jpg says different! */
+  font-size: 0.95rem;
+  /* maybe a touch of negative top margin to get the legend
+  closer to the h2 whilst keeping the 1.5 gap on .panel */
+  margin-top: -0.5rem;
+}
+
+.rating-radios {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 2rem 0 0.5rem 0;
+}
+
+.rating-radio-label {
+  /* grid positioning works better than flex for this */
+  display: grid;
+  place-content: center;
+
+  /* position here so inner label span can be positioned absolutely */
+  position: relative;
+}
+
+/* adapted from Stephanie Eckles custom styled radio buttons */
+/* https://moderncss.dev/pure-css-custom-styled-radio-buttons/ */
+
+input[type='radio'] {
+  /* webkit appearance just in case */
+  -webkit-appearance: none;
+  appearance: none;
+  border-radius: 50%;
+
+  width: var(--rating-circle-size);
+  height: var(--rating-circle-size);
+
+  display: grid;
+  place-content: center;
+
+  background-color: var(--neutral-dark);
+  /* cursor: pointer; */
+}
+
+input[type='radio']:hover {
+  background-color: var(--primary-accent-1);
+  /* outline: 0; */
+}
+
+input[type='radio']:focus {
+  /* not setting background color to the hover colour,
+  bc focused radio gets automatically checked */
+  outline: 0;
+}
+
+:is(
+    input[type='radio']:checked,
+    input[type='radio']:checked:hover,
+    input[type='radio']:active
+  ) {
+  background-color: var(--neutral-medium);
+}
+
+.rating-radio-label-inner {
+  /* basically putting the inner label span over the top 
+  of the container label with the same width, height and 
+  place-content values, so the label text (the numbers) 
+  are centred */
+  position: absolute;
+  /* might need the top adjusting, the numbers look a touch high */
+  width: var(--rating-circle-size);
+  height: var(--rating-circle-size);
+  display: grid;
+  place-content: center;
+  /* cursor declaration needs to be on this inner label now,
+  bc it's on top of everything */
+  cursor: pointer;
+
+  color: var(--neutral-medium);
+  /* is it maybe bold? */
+  font-weight: bold;
+}
+
+/* :is(.rating-radio-label-inner:hover, .rating-radio-label-inner:active) {
+  color: var(--neutral-white);
+} */
+
+.rating-radio-label-inner:hover {
+  color: var(--neutral-white);
+}
+
+/* sibling selector to set the label color 
+if its radio button is checked */
+input[type='radio']:checked + .rating-radio-label-inner {
+  color: var(--neutral-white);
+}
+
+.rating-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 100%;
+  min-height: 3rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2rem;
+  /* line-height causing it to not centre vertically properly (reset is setting it to 1.5) */
+  line-height: 1;
+  font-size: 0.9rem;
+  font-weight: bold;
+  border: 0;
+  border-radius: 2rem;
+  cursor: pointer;
+  transform: scale(1);
+  transition: transform 50ms ease-in-out;
+}
+
+.rating-btn:active {
+  transform: scale(0.95);
+}
+
+.btn-submit {
+  color: var(--neutral-white);
+  background-color: var(--primary-accent-1);
+}
+
+/* .btn-submit:hover,
+.btn-submit:focus {
+  color: var(--primary-accent-1);
+  background-color: var(--neutral-white);
+} */
+
+:is(.btn-submit:hover, .btn-submit:focus) {
+  color: var(--primary-accent-1);
+  background-color: var(--neutral-white);
+  outline: 0;
+}
+
+/* -------------- thank you panel stuff ------- */
+
+/* anything specific to to the panel in thank you state
+can go here */
+
+.thankyou {
+  align-items: center;
+  /* padding: 2.5rem 1.5rem; */
+}
+
+/* just a bit more margin on the illustration */
+/* nah- put more padding top and bottom for the thankyou panel */
+
+/* .thankyou-img {
+  margin-top: 1rem;
+} */
+
+.pill-result {
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  width: fit-content;
+  color: var(--primary-accent-1);
+  background-color: var(--neutral-dark);
+  /* bit of margin-bottom here to separate it from the h2 and p */
+  margin-bottom: 1rem;
+}
+
+.thankyou h2,
+.thankyou p {
+  text-align: center;
+}
+
+@media (min-width: 450px) {
+  .thankyou h2,
+  .rating h2 {
+    font-size: 2rem;
+  }
+}
+
+.thankyou p {
+  color: var(--neutral-medium);
+  /* according to style guide font-size should be 15px
+  but the mobile-design.jpg says different! */
+  font-size: 0.95rem;
+  /* maybe a touch of negative top margin to get the p
+  closer to the h2 whilst keeping the 1.5 gap on .panel */
+  margin-top: -1rem;
+}
+
+@media (min-width: 450px) {
+  .thankyou p,
+  .rating legend {
+    font-size: 1rem;
+  }
+}
+
+/* something to hide elements not in the current state */
+/* has to be late in the cascade to override the display value in the panels */
+/* well anytime after panel should do it but stick it here */
+.undisplay {
+  display: none;
+}
+
+/* ---------- frontend mentor attributions ------------- */
+.attribution {
+  font-size: 11px;
+  text-align: center;
+}
+.attribution a {
+  color: hsl(228, 45%, 44%);
+  text-decoration: none;
+}
+
+.attribution a:hover {
+  text-decoration: underline;
+}
