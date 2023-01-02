@@ -59,12 +59,14 @@ h1 {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  padding: 1.5rem;
+  /* horizontal padding only */
+  /* let the justify take care of the vertical */
+  padding: 0 2rem;
   justify-content: center;
 
   /* probably set height so it's not determined by the content
   bc the content will change in the thank you state */
-  min-height: 29rem;
+  min-height: 27rem;
   border-radius: 1rem;
   background: var(--gradient);
 }
@@ -73,7 +75,7 @@ h1 {
   .panel {
     /* max-width should probably only be on desktop */
     max-width: 27rem;
-    padding: 2.5rem;
+    /* padding: 2.5rem; */
   }
 }
 
@@ -112,20 +114,22 @@ can go here, currently just the variable for the circle size */
 }
 
 .rating-icon-inner {
-  width: 0.9rem;
-  height: 0.9rem;
+  /* width: 0.9rem;
+  height: 0.9rem; */
+  width: 33%;
+  height: 33%;
   background: url(../images/icon-star.svg) no-repeat;
   /* background-size: cover; */
   /* cover was cutting a bit off, try 100% */
   background-size: 100%;
 }
 
-@media (min-width: 450px) {
+/* @media (min-width: 450px) {
   .rating-icon-inner {
     width: 1.2rem;
     height: 1.2rem;
   }
-}
+} */
 
 .rating-fieldset {
   /* fieldset comes with default padding */
@@ -160,6 +164,9 @@ can go here, currently just the variable for the circle size */
 
   /* position here so inner label span can be positioned absolutely */
   position: relative;
+
+  /* border to see what's going on with the alignment */
+  /* border: 1px solid #f0f; */
 }
 
 /* adapted from Stephanie Eckles custom styled radio buttons */
@@ -178,12 +185,10 @@ input[type='radio'] {
   place-content: center;
 
   background-color: var(--neutral-dark);
-  /* cursor: pointer; */
 }
 
 input[type='radio']:hover {
   background-color: var(--primary-accent-1);
-  /* outline: 0; */
 }
 
 input[type='radio']:focus {
@@ -218,6 +223,9 @@ input[type='radio']:focus {
   color: var(--neutral-medium);
   /* is it maybe bold? */
   font-weight: bold;
+
+  /* line-height to get the vertical centering right */
+  line-height: normal;
 }
 
 /* :is(.rating-radio-label-inner:hover, .rating-radio-label-inner:active) {
@@ -238,12 +246,13 @@ input[type='radio']:checked + .rating-radio-label-inner {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 100%;
+  align-self: stretch;
+  /* min-width: 100%; */
   min-height: 3rem;
   text-transform: uppercase;
   letter-spacing: 0.2rem;
   /* line-height causing it to not centre vertically properly (reset is setting it to 1.5) */
-  line-height: 1;
+  line-height: normal;
   font-size: 0.9rem;
   font-weight: bold;
   border: 0;
@@ -284,17 +293,11 @@ can go here */
   /* padding: 2.5rem 1.5rem; */
 }
 
-/* just a bit more margin on the illustration */
-/* nah- put more padding top and bottom for the thankyou panel */
-
-/* .thankyou-img {
-  margin-top: 1rem;
-} */
-
 .pill-result {
   padding: 0.5rem 1rem;
   border-radius: 2rem;
-  width: fit-content;
+  /* not sure what this was doing but seems ok without it */
+  /* width: fit-content; */
   color: var(--primary-accent-1);
   background-color: var(--neutral-dark);
   /* bit of margin-bottom here to separate it from the h2 and p */
@@ -326,7 +329,9 @@ can go here */
 @media (min-width: 450px) {
   .thankyou p,
   .rating legend {
-    font-size: 1rem;
+    /*  this is an odd size to get lines to break
+     in the same place as the design brief! */
+    font-size: 1.01rem;
   }
 }
 
